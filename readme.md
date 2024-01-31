@@ -1,6 +1,6 @@
-### API 설계
+### Prisma 설계
 
-[API노션페이지](https://gainful-bonsai-fe1.notion.site/API-933152851dff4395a74d931328dd5429?pvs=4)
+[Prisma 노션페이지](https://gainful-bonsai-fe1.notion.site/API-933152851dff4395a74d931328dd5429?pvs=4)
 
 ### ERD 설계 링크
 

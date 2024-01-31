@@ -12,8 +12,44 @@ datasource db {
 
 model Users {
   userId Int @id @default(autoincrement()) @map("userId")
-  email String @map("email")
+  email String @unique @map("email")
   password String @map("password")
+  verifyPassword String @map("verifyPassword")
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
+
+  userInfo UserInfo?
+  resumes Resumes[]
+
+  @@map("Users")
+}
+
+model UserInfo {
+  userInfoId Int @id @default(autoincrement()) @map("userInfoId")
+  userId Int @unique @map("userId")
+  name String @map("name")
+  age Int? @map("age")
+  gender String @map("gender")
+  profileImage String? @map("profileImage") 
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  user Users @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@map("UserInfo")
+}
+
+model Resumes {
+  resumeId Int @id @default(autoincrement()) @map("resumeId")
+  userId Int @map("userId")
+  title String @map("title")
+  aboutMe String @map("aboutMe") @db.Text
+  authorName String @map("authorName")
+  status String @map("status")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  users Users @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@map("Resumes")
 }

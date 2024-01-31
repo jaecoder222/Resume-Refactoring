@@ -1,7 +1,7 @@
 import express from "express";
 import UsersRouter from "../routes/user.router.js";
 const app = express();
-const PORT = 5000;
+const PORT = 3010;
 
 app.use(express.json());
 app.use("/api", [UsersRouter]);
