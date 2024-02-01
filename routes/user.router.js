@@ -34,7 +34,6 @@ router.post("/sign-up", async (req, res, next) => {
           data: {
             email,
             password: hashedPassword,
-            verifyPassword: hashedPassword,
           },
         });
 
@@ -61,6 +60,7 @@ router.post("/sign-up", async (req, res, next) => {
   }
 });
 
+const tokenStorages = {};
 router.post("/sign-in", async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -73,9 +73,21 @@ router.post("/sign-in", async (req, res, next) => {
   if (!(await bcrypt.compare(password, user.password)))
     return res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
 
-  const token = jwt.sign({ userId: user.userId }, "secret-key");
+  const accessToken = jwt.sign({ userId: user.userId }, "secret-key", {
+    expiresIn: "12h",
+  });
+  const refreshToken = jwt.sign({ userId: user.userId }, "secret-key", {
+    expiresIn: "7d",
+  });
 
-  res.cookie("authorization", `Bearer ${token}`);
+  tokenStorages[refreshToken] = {
+    userId: user.userId,
+    ip: req.ip,
+    userAgent: req.headers["user-agent"],
+  };
+
+  res.cookie("accessToken", `Bearer ${accessToken}`);
+  res.cookie("refreshToken", `Bearer ${refreshToken}`);
   return res.status(200).json({ message: "로그인에 성공하였습니다." });
 });
 
