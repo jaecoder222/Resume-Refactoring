@@ -1,9 +1,11 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import UsersRouter from "../routes/user.router.js";
 const app = express();
 const PORT = 3010;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use("/api", [UsersRouter]);
 
 app.listen(PORT, () => {
