@@ -13,19 +13,27 @@
     &nbsp;&nbsp;&nbsp;- 회원가입 API, 로그인 API, 내 정보 조회 API, 인증 <strong>Middleware<strong> 구현<br>
     &nbsp;&nbsp;&nbsp;- 상품 관련 기능에 인증 로직 추가<br>
 <br>
-<hr>
-<br>
 
 ## &#128296; 기술 스택
 
  <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
-<img src="https://img.shields.io/badge/yarn-339AF0?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
-<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
-<img src="https://img.shields.io/badge/prisma-47A248?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
-<img src="https://img.shields.io/badge/.env-F7DF1E?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
- <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
 
-### API 명세서
+<img src="https://img.shields.io/badge/yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white">
+
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+
+<img src="https://img.shields.io/badge/prisma-47A248?style=for-the-badge&logo=prisma&logoColor=white">
+
+<img src="https://img.shields.io/badge/.env-F7DF1E?style=for-the-badge&logo=.env&logoColor=white">
+
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+
+<img src="https://img.shields.io/badge/github-7952B3?style=for-the-badge&logo=github&logoColor=white"><br>
+<br>
+
+## &#128269; API 명세서
 
 <br>
 
@@ -37,7 +45,7 @@ API명세서는 리팩토링 과정중 계속 수정 될 수 있습니다.<br>
 <hr>
 <br>
 
-### ERD 설계 링크
+## &#128193; ERD 설계 링크
 
 <br>
 
