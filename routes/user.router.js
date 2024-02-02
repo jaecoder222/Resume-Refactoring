@@ -4,6 +4,9 @@ import { Prisma } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import authMiddleware from "../src/middlewares/auth.middleware.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const router = express.Router();
 
@@ -51,7 +54,7 @@ router.post("/sign-up", async (req, res, next) => {
       },
       {
         isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted,
-      }
+      },
     );
 
     return res.status(201).json({ message: "회원가입이 완료되었습니다." });
@@ -73,12 +76,20 @@ router.post("/sign-in", async (req, res, next) => {
   if (!(await bcrypt.compare(password, user.password)))
     return res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
 
-  const accessToken = jwt.sign({ userId: user.userId }, "secret-key", {
-    expiresIn: "12h",
-  });
-  const refreshToken = jwt.sign({ userId: user.userId }, "secret-key", {
-    expiresIn: "7d",
-  });
+  const accessToken = jwt.sign(
+    { userId: user.userId },
+    process.env.TOKEN_SECRET_KEY,
+    {
+      expiresIn: "12h",
+    },
+  );
+  const refreshToken = jwt.sign(
+    { userId: user.userId },
+    process.env.TOKEN_SECRET_KEY,
+    {
+      expiresIn: "7d",
+    },
+  );
 
   tokenStorages[refreshToken] = {
     userId: user.userId,
