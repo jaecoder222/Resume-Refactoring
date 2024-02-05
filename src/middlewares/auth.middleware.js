@@ -24,8 +24,6 @@ export default async function (req, res, next) {
       where: { userId: +userId },
     });
 
-    if (!user) throw new Error("토큰 사용자가 존재하지 않습니다.");
-
     req.user = user;
 
     next();
