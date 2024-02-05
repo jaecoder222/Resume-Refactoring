@@ -15,6 +15,8 @@ export default async function (req, res, next) {
     if (tokenType !== "Bearer")
       throw new Error("토큰 타입이 Bearer가 아닙니다.");
 
+    if (!token) throw new Error("사용자의 토큰 정보가 없습니다.");
+
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET_KEY);
     const userId = decodedToken.userId;
 
