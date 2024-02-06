@@ -21,7 +21,11 @@ router.post("/sign-up", async (req, res, next) => {
       age,
       gender,
       profileImage,
+      grade,
     } = req.body;
+
+    if (grade && !["user", "admin"].includes(grade))
+      return res.status(400).json({ message: "등급이 올바르지 않습니다." });
 
     if (clientId) {
       const user = await prisma.users.findFirst({
@@ -35,6 +39,7 @@ router.post("/sign-up", async (req, res, next) => {
         data: {
           clientId,
           name,
+          grade,
         },
       });
       return res.status(201).json({ message: "회원가입이 완료되었습니다." });
@@ -71,6 +76,7 @@ router.post("/sign-up", async (req, res, next) => {
               email,
               password: hashedPassword,
               name,
+              grade,
             },
           });
 

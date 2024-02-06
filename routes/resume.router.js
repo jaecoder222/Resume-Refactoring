@@ -70,24 +70,36 @@ router.patch("/resumes/:resumesId", authMiddleware, async (req, res, next) => {
   const { title, aboutMe, authorName, status } = req.body;
   const { resumesId } = req.params;
   const { userId } = req.user;
+  console.log(userId);
+
+  const resume = await prisma.resumes.findFirst({
+    where: { resumeId: +resumesId },
+  });
+  console.log(resume);
 
   const users = await prisma.users.findFirst({
     where: { userId: +userId },
   });
+  console.log(users);
+  console.log(users.grade);
 
   if (!users) return res.status(401).json({ message: "수정 권한이 없습니다." });
 
-  const update = await prisma.resumes.update({
-    where: { resumeId: +resumesId },
-    data: {
-      title,
-      aboutMe,
-      authorName,
-      status,
-    },
-  });
+  if (userId !== resume.userId && users.grade === "user") {
+    return res.status(401).json({ message: "이력서 작성자가 아닙니다." });
+  } else if (userId === resume.userId || users.grade === "admin") {
+    const update = await prisma.resumes.update({
+      where: { resumeId: +resumesId },
+      data: {
+        title,
+        aboutMe,
+        authorName,
+        status,
+      },
+    });
 
-  return res.status(200).json({ message: "이력서가 수정되었습니다." });
+    return res.status(200).json({ data: update });
+  }
 });
 
 router.delete("/resumes/:resumesId", authMiddleware, async (req, res, next) => {
