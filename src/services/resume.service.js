@@ -3,11 +3,11 @@ export class ResumesService {
     this.resumesRepository = resumesRepository;
   }
 
-  createResume = async (title, aboutMe, authorName) => {
+  createResume = async (userId, title, aboutMe) => {
     const createResume = await this.resumesRepository.createResume(
+      userId,
       title,
       aboutMe,
-      authorName,
     );
 
     return {
@@ -16,6 +16,7 @@ export class ResumesService {
       title: createResume.title,
       aboutMe: createResume.aboutMe,
       authorName: createResume.authorName,
+      status: createResume.status,
       createdAt: createResume.createdAt,
       updatedAt: createResume.updatedAt,
     };

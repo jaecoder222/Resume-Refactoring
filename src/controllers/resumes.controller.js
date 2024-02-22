@@ -6,15 +6,16 @@ export class ResumesController {
   // 이력서 생성 API
   createResume = async (req, res, next) => {
     try {
-      const { title, aboutMe, authorName } = req.body;
+      const { userId } = req.user;
+      const { title, aboutMe } = req.body;
 
       if (!title) throw new Error("title은 필수 값입니다.");
       if (!aboutMe) throw new Error("aboutMe는 필수 값입니다.");
 
       const createdResume = await this.resumesService.createResume(
+        userId,
         title,
         aboutMe,
-        authorName,
       );
 
       return res.status(201).json({ data: createdResume });

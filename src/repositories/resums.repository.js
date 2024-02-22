@@ -3,12 +3,12 @@ export class ResumesRepository {
     this.prisma = prisma;
   }
 
-  createResume = async (title, aboutMe, authorName) => {
+  createResume = async (userId, title, aboutMe) => {
     const createdResume = await this.prisma.resumes.create({
       data: {
+        userId,
         title,
         aboutMe,
-        authorName,
       },
     });
     return createdResume;
@@ -43,7 +43,7 @@ export class ResumesRepository {
   };
 
   deleteResume = async (resumeId) => {
-    const deleteResume = await this.prisma.resums.delete({
+    const deleteResume = await this.prisma.resumes.delete({
       where: { resumeId: +resumeId },
     });
 

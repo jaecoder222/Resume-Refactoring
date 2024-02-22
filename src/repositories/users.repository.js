@@ -32,18 +32,10 @@ export class UsersRepository {
     return signinUser;
   };
 
-  // findUserById = async (userId) => {
-  //   if (!userId) throw new Error("유저가 존재하지 않습니다.");
-  //   const findUser = await this.prisma.users.findUnique({
-  //     where: { userId },
-  //     select: {
-  //       userId: true,
-  //       email: true,
-  //       name: true,
-  //       createdAt: true,
-  //       updatedAt: true,
-  //     },
-  //   });
-  //   return findUser;
-  // };
+  findUserById = async (userId) => {
+    const findUser = await this.prisma.users.findUnique({
+      where: { userId: +userId },
+    });
+    return findUser;
+  };
 }

@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import bcrypt from "bcrypt";
 dotenv.config();
 
 export class UsersController {
@@ -74,14 +73,14 @@ export class UsersController {
     }
   };
 
-  // findUser = async (req, res, next) => {
-  //   try {
-  //     const { userId } = req.user;
-  //     const user = await this.usersService.findUser(userId);
+  findUser = async (req, res, next) => {
+    try {
+      const { userId } = req.user;
+      const user = await this.usersService.findUser(userId);
 
-  //     return res.status(200).json({ data: user });
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // };
+      return res.status(200).json({ data: user });
+    } catch (err) {
+      next(err);
+    }
+  };
 }

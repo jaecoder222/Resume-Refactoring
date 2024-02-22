@@ -25,6 +25,7 @@ export class UsersService {
     const signin = await this.usersRepository.signIn(email, password);
 
     return {
+      userId: signin.userId,
       email: signin.email,
       name: signin.name,
       createdAt: signin.createdAt,
@@ -32,15 +33,15 @@ export class UsersService {
     };
   };
 
-  // findUser = async (userId) => {
-  //   const user = await this.usersRepository.findUserById(userId);
+  findUser = async (userId) => {
+    const user = await this.usersRepository.findUserById(userId);
 
-  //   return {
-  //     userId: user.userId,
-  //     email: user.email,
-  //     name: user.name,
-  //     createdAt: user.createdAt,
-  //     updatedAt: user.updatedAt,
-  //   };
-  // };
+    return {
+      userId: user.userId,
+      email: user.email,
+      name: user.name,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
+  };
 }
